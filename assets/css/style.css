@@ -1,0 +1,71 @@
+.wrapper {
+	background-image: url("../images/cork-wallet.png");
+	
+}
+body {	
+	
+}
+header {
+	background-color: #ffffff;
+	border-bottom: 2px;
+	border-color: #cccccc;
+	height: 75px;
+}
+
+
+#about {
+	background-color: #ffffff;
+	color: #777777;
+	width: 650px;
+	height: 475px;
+	margin-left: 60px;
+	margin-bottom: 50px;
+	margin-top: 15px;
+	padding: 20px;
+	float: left;
+	
+}
+#connect {
+	background-color: #ffffff;
+	color: #777777;
+	width: 270px;
+	height: 200px;
+	padding: 15px;
+	margin-right: 275px;
+	margin-top: 15px;
+	text-align: center;
+	float: right; 
+}
+
+footer {
+	clear: both;
+	background-color: #666666;
+	height: 125px;
+	border-style: solid;
+	border-top: 15px;
+	border-color: #dddddd;
+}
+#icon1 {
+	background-image: url("../images/github.png");
+	height: 50px;
+	width: 50px;
+	margin-top: 70px;
+	float: left;
+	margin-right: 10px;
+	margin-left: 30px;
+}
+#icon2 {
+	background-image: url("../images/linkedin.png");
+	height: 50px;
+	width: 50px;
+	margin-top: 70px;
+	float: left;
+	margin-right: 10px;
+}
+#icon3 {
+	background-image: url("../images/stackoverflow.png");
+	height: 50px;
+	width: 50px;
+	margin-top: 70px;
+	float: left;
+}
