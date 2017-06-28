@@ -1,4 +1,4 @@
-.panel-default {
+./.panel-default {
   margin-top: 15px;
   float: left;
   height: 150px;
@@ -7,7 +7,7 @@
 }
 body, html {
 height: 100%;
-background-image: url(background31.jpg);
+background-image: url(./background31.jpg);
 }
 .wrapper {
   width: 960px;
