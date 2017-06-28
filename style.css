@@ -1,0 +1,24 @@
+.panel-default {
+  margin-top: 15px;
+  float: left;
+  height: 150px;
+  background-color: #228B22;
+}
+body, html {
+height: 100%;
+}
+.wrapper {
+  width: 960px;
+}
+.page-header {
+  width: 300px;
+  background-color: #FF8C00;
+  color: white;
+}
+.jumbotron {
+  background-color: #FFE4B5;
+  color: #32CD32;
+}
+.btn-group {
+ float: left;
+}
