@@ -1,65 +1,109 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <title>Crystals Collector</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script type="text/javascript" src="assets/game.js"></script>
-</head>
-<div class="wrapper">
-
+  <head>
+    <meta charset="utf-8">
+    <title>Trivia Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    </script>
+  </head>
   <body>
-    <div class="page-header">
-      <h1>Crystals Collector!</h1>
-    </div>
-    <div class="jumbotron">
-      <p>You will be given a random number at the start of the game.</p>
-      <p>Ther are four crystals below. By clicking on a crystal you wil add a specific amount of points to your total.</p>
-      <p>You win the game by matching your total score to random number, you lose the game if your total score goes above the random number.</p>
-      <p>The value of each crystal is hidden from you until you click on it.</p>
-      <p>Each time the game starts, the game will change values of each crystal.</p>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div id="ranNum">
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            Wins and Losses
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-default" value="btnLeft">Left</button>
-          <button type="button" class="btn btn-default" value="btnMiddle">Middle</button>
-          <button type="button" class="btn btn-default" value="btnRight">Right</button>
-          <button type="button" class="btn btn-default" value="btnEmerald">Emerald</button>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-          </div>
-          <div class="panel-body">
-            <div id="score">
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="background">
+      <img src="assets/images/TriviaNight.png" alt="Trivia Night">
+<p>You have 15 seconds to answer the True or False questions.</p>
+<p> Time remaining is <span id="countdowntimer">15 </span> seconds</p>
+<p id="score"></p>
+<p id="question"></p>
+    <script type="text/javascript">
+    // VARIABLES
+    // ==========================================================================
+
+    // The object questions for our quiz game.
+    var questions = {
+      q1: ["Austin is the capitol of Texas.", "t"],
+      q2: ["St. Paul is the capitol of Minnesota.", "t"],
+      q3: ["Rick Perry is the governor of Texas.", "f"],
+      q4: ["Donald Trump is President of the United States.", "t"],
+      q5: ["The earth is flat.", "f"]
+    };
+
+
+    var score = 0;
+    // Variable to hold the index of current question.
+    var questionIndex = 0;
+    // Array of questions.
+    var questionsArray = [questions.q1, questions.q2, questions.q3, questions.q4, questions.q5];
+
+
+    // Function to render questions.
+    function renderQuestion() {
+      // If there are still more questions, render the next one.
+      if (questionIndex <= (questionsArray.length - 1)) {
+        document.querySelector("#question").innerHTML = questionsArray[questionIndex][0];
+      }
+      // If there aren't, render the end game screen.
+      else {
+        document.querySelector("#question").innerHTML = "Game Over!";
+        document.querySelector("#score").innerHTML = "Final Score: " + score + " out of  " + questionsArray.length;
+      }
+    }
+
+        // Function that updates the score...
+    function updateScore() {
+      document.querySelector("#score").innerHTML = "Score: " + score;
+    }
+
+
+    // MAIN PROCESS
+    // ==============================================================================
+
+    // Calling functions to start the game.
+    renderQuestion();
+    updateScore();
+
+    // When the user presses a key, it will run the following function...
+    document.onkeyup = function(event) {
+
+      // countdown timer
+      var timeleft = 15;
+        var gameTimer = setInterval(function(){
+        timeleft--;
+        $("#countdowntimer").text(timeleft);
+        if(timeleft <= 0)
+                  clearInterval(gameTimer);
+        },1000);
+
+      // If there are no more questions, stop the function.
+      if (questionIndex === questionsArray.length) {
+        return;
+      }
+
+      // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
+      var userInput = String.fromCharCode(event.keyCode).toLowerCase();
+
+      // Only run this code if "t" or "f" were pressed.
+      if (userInput === "t" || userInput === "f") {
+
+        // If they guess the correct answer, increase and update score, alert them they got it right.
+        if (userInput === questionsArray[questionIndex][1]) {
+          alert("Correct!");
+          score++;
+          updateScore();
+        }
+        // If wrong, alert them they are wrong.
+        else {
+          alert("Wrong!");
+        }
+
+        // Increment the questionIndex variable and call the renderQuestion function.
+        questionIndex++;
+        renderQuestion();
+
+      }
+
+    };
+
+    </script>
     </div>
   </body>
-</div>
-
 </html>
