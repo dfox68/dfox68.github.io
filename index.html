@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Giphy</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <h1>GIPHY Search</h1>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-3">
+        <form role="form">
+          <div class="form-group">
+            <label for="gif-input">Search for GIFs</label>
+            <input class="form-control" id="gif-input" type="text">
+            <input id="add-gifs" type="submit" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIFs rendered here-->
+  <div id="gif-view"></div>
+
+  <!-- Rendered button go here  -->
+  <div id="buttons-view"></div>
+
+
+  <script type="text/javascript">
+    var gifs = [];
+
+    $("#add-gifs").on("click", function(event) {
+      event.preventDefault();
+
+      var gif = $("#gif-input").val().trim();
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        .done(function(response) {
+          for (var i = 0; i < response.data.length; i++) {
+            var gifDiv = $("<div>");
+            var p = $("<p>").text("Rating: " + response.data[i].rating);
+            var gifImage = $("<img>");
+            gifImage.attr("src", response.data[i].images.fixed_height.url);
+            gifDiv.append(p);
+            gifDiv.append(gifImage);
+            $("#gif-view").append(gifDiv);
+
+
+            var a = $("<button>");
+            a.text("Play/Pause");
+            a.addClass("gif");
+            $(gifDiv).append(a);
+
+          }
+        })
+    });
+
+
+    //    Here's my code to pause/play the gifs.
+
+    //    Basically it looks for when the user clicks a gif (in your case it would be the
+    //    Play/Pause button).
+    //    All my gifs have a "data-switch" variable that holds the other state of the gif,
+    //    either the still one if they are moving or vice versa.
+    //    This snippet of code just switches them around.
+
+
+    //  $(document).on("click", ".gif", function(){
+    //   let switchState = $(this).attr("src");
+    //    this.src = $(this).attr("data-switch");
+    //    $(this).attr("data-switch", switchState);
+    //  });
+  </script>
+</body>
+
+</html>
